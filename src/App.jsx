@@ -31,7 +31,8 @@ const personalInfo = {
   github: "https://github.com/DhavalSoni5",
   linkedin: "https://www.linkedin.com/in/dhaval-maicha-03a188383/",
   // Yahan '/Dhaval.pdf' ka matlab hai file seedha public folder me hai
-  resumeUrl: "/Dhaval.pdf", 
+ resumeUrl: `${import.meta.env.BASE_URL}Dhaval.pdf`,
+
   summary: "Passionate Backend Developer writing clean, scalable code. Skilled in Python, Django/Flask, and REST API development with a focus on building secure, high-performance systems.",
 };
 
