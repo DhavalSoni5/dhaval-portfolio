@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Link } from 'react-scroll';
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Link } from "react-scroll";
 import {
   Github,
   Linkedin,
@@ -18,8 +18,12 @@ import {
   Network,
   Webhook,
   Cloud,
-  GitBranch
-} from 'lucide-react';
+  GitBranch,
+} from "lucide-react";
+
+const downloadResume = () => {
+  window.location.href = "/Dhaval.pdf";
+};
 
 // --- Data extracted from your CV ---
 const personalInfo = {
@@ -30,8 +34,9 @@ const personalInfo = {
   phone: "+91 7567278394",
   github: "https://github.com/DhavalSoni5",
   linkedin: "https://www.linkedin.com/in/dhaval-maicha-03a188383/",
-  resumeUrl: "/Dhaval.pdf", 
-  summary: "Passionate Backend Developer writing clean, scalable code. Skilled in Python, Django/Flask, and REST API development with a focus on building secure, high-performance systems.",
+  resumeUrl: "/Dhaval.pdf",
+  summary:
+    "Passionate Backend Developer writing clean, scalable code. Skilled in Python, Django/Flask, and REST API development with a focus on building secure, high-performance systems.",
 };
 
 const skillCategories = [
@@ -42,7 +47,7 @@ const skillCategories = [
       { name: "HTML", level: 85, icon: <FileCode size={20} /> },
       { name: "Tailwind CSS", level: 80, icon: <Palette size={20} /> },
       { name: "SQL", level: 85, icon: <Database size={20} /> },
-    ]
+    ],
   },
   {
     category: "Core CS",
@@ -51,14 +56,14 @@ const skillCategories = [
       { name: "OOP", level: 85, icon: <Component size={20} /> },
       { name: "CN", level: 90, icon: <Network size={20} /> },
       { name: "DBMS", level: 85, icon: <Database size={20} /> },
-    ]
+    ],
   },
   {
     category: "Cloud & APIs",
     items: [
       { name: "Rest API", level: 80, icon: <Webhook size={20} /> },
       { name: "Google Cloud", level: 90, icon: <Cloud size={20} /> },
-    ]
+    ],
   },
   {
     category: "Tools & Platforms",
@@ -66,8 +71,8 @@ const skillCategories = [
       { name: "Git", level: 80, icon: <GitBranch size={20} /> },
       { name: "GitHub", level: 85, icon: <Github size={20} /> },
       { name: "VS Code", level: 85, icon: <Cloud size={20} /> },
-    ]
-  }
+    ],
+  },
 ];
 
 const projects = [
@@ -77,15 +82,17 @@ const projects = [
     desc: "Interactive web app to visualize user-uploaded CSV files with dynamic filtering and statistical analysis.",
     color: "from-blue-500 to-cyan-400",
     githubLink: "https://github.com/DhavalSoni5/Universal-CSV-Data-Analyzer",
-    liveLink: "https://universal-csv-data-analyzer-o4uc5wacyzbmbgcrt53vpn.streamlit.app/"
+    liveLink:
+      "https://universal-csv-data-analyzer-o4uc5wacyzbmbgcrt53vpn.streamlit.app/",
   },
   {
     title: "Real-Time Desktop Chat App",
     tech: "Python, Tkinter, Socket",
     desc: "Multi-client chat with edit/delete features, file sharing, voice messaging, and live online/offline status.",
     color: "from-purple-500 to-pink-500",
-    githubLink: "https://github.com/DhavalSoni5/Real-Time-Desktop-Chat-Application",
-  }
+    githubLink:
+      "https://github.com/DhavalSoni5/Real-Time-Desktop-Chat-Application",
+  },
 ];
 
 const education = [
@@ -93,14 +100,14 @@ const education = [
     degree: "B.Tech in Computer Engineering",
     school: "Silver Oak University, Ahmedabad",
     year: "2023 - 2026",
-    score: "CGPA: 8.68"
+    score: "CGPA: 8.68",
   },
   {
     degree: "Diploma in Computer Engineering",
     school: "Government Polytechnic, Bhuj",
     year: "2020 - 2023",
-    score: "CGPA: 7.89"
-  }
+    score: "CGPA: 7.89",
+  },
 ];
 
 // --- Utility Components ---
@@ -140,12 +147,17 @@ const SocialButton = ({ icon, href, label }) => (
 );
 
 const ContactCard = ({ icon, title, value, href }) => (
-  <a href={href} className="flex-1 p-6 rounded-2xl bg-black border border-zinc-800 hover:border-blue-500/50 group transition-all">
+  <a
+    href={href}
+    className="flex-1 p-6 rounded-2xl bg-black border border-zinc-800 hover:border-blue-500/50 group transition-all"
+  >
     <div className="w-10 h-10 mx-auto mb-4 rounded-full bg-zinc-900 flex items-center justify-center text-gray-400 group-hover:text-blue-400 transition-colors">
       {icon}
     </div>
     <div className="text-sm text-gray-500 mb-1">{title}</div>
-    <div className="font-bold text-white group-hover:text-blue-400 transition-colors">{value}</div>
+    <div className="font-bold text-white group-hover:text-blue-400 transition-colors">
+      {value}
+    </div>
   </a>
 );
 
@@ -159,16 +171,19 @@ const Typewriter = ({ text }) => {
       const timeout = setTimeout(() => setReverse(true), 1000);
       return () => clearTimeout(timeout);
     }
-    
+
     if (subIndex === 0 && reverse) {
       setReverse(false);
       setIndex((prev) => (prev + 1) % text.length);
       return;
     }
 
-    const timeout = setTimeout(() => {
-      setSubIndex((prev) => prev + (reverse ? -1 : 1));
-    }, reverse ? 50 : 100);
+    const timeout = setTimeout(
+      () => {
+        setSubIndex((prev) => prev + (reverse ? -1 : 1));
+      },
+      reverse ? 50 : 100,
+    );
 
     return () => clearTimeout(timeout);
   }, [subIndex, index, reverse, text]);
@@ -194,7 +209,7 @@ const Navbar = () => (
       MD.
     </div>
     <div className="hidden md:flex gap-8 text-sm font-medium text-gray-300">
-      {['About', 'Skills', 'Projects', 'Education', 'Contact'].map((item) => (
+      {["About", "Skills", "Projects", "Education", "Contact"].map((item) => (
         <Link
           key={item}
           to={item.toLowerCase()}
@@ -216,7 +231,10 @@ const Navbar = () => (
 );
 
 const Hero = () => (
-  <section id="about" className="min-h-screen flex flex-col justify-center items-center relative overflow-hidden bg-black text-white px-4">
+  <section
+    id="about"
+    className="min-h-screen flex flex-col justify-center items-center relative overflow-hidden bg-black text-white px-4"
+  >
     <div className="absolute top-20 left-20 w-72 h-72 bg-purple-600/30 rounded-full blur-[100px]" />
     <div className="absolute bottom-20 right-20 w-96 h-96 bg-blue-600/20 rounded-full blur-[100px]" />
 
@@ -230,11 +248,16 @@ const Hero = () => (
         Welcome to my portfolio
       </span>
       <h1 className="mt-6 text-6xl md:text-8xl font-extrabold tracking-tight">
-        {personalInfo.name.split(" ")[0]} <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600">{personalInfo.name.split(" ")[1]}</span>
+        {personalInfo.name.split(" ")[0]}{" "}
+        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600">
+          {personalInfo.name.split(" ")[1]}
+        </span>
       </h1>
       <div className="mt-4 text-xl md:text-2xl text-gray-400 font-light flex items-center justify-center gap-2">
         <span>I build</span>
-        <Typewriter text={["Secure Backends.", "Scalable APIs.", "Real-time Systems."]} />
+        <Typewriter
+          text={["Secure Backends.", "Scalable APIs.", "Real-time Systems."]}
+        />
       </div>
 
       <p className="mt-6 max-w-xl mx-auto text-gray-500 leading-relaxed">
@@ -242,17 +265,27 @@ const Hero = () => (
       </p>
 
       <div className="mt-10 flex flex-wrap gap-4 justify-center items-center">
-        <SocialButton icon={<Github size={20} />} href={personalInfo.github} label="GitHub" />
-        <SocialButton icon={<Linkedin size={20} />} href={personalInfo.linkedin} label="LinkedIn" />
-        <SocialButton icon={<Mail size={20} />} href={`mailto:${personalInfo.email}`} label="Email" />
-        <a
-          href={personalInfo.resumeUrl}
-          download
-          className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-black font-bold hover:bg-blue-500 hover:text-white transition-all duration-300 transform hover:scale-105 shadow-lg shadow-white/5"
+        <SocialButton
+          icon={<Github size={20} />}
+          href={personalInfo.github}
+          label="GitHub"
+        />
+        <SocialButton
+          icon={<Linkedin size={20} />}
+          href={personalInfo.linkedin}
+          label="LinkedIn"
+        />
+        <SocialButton
+          icon={<Mail size={20} />}
+          href={`mailto:${personalInfo.email}`}
+          label="Email"
+        />
+        <button
+          onClick={downloadResume}
+          className="flex items-center gap-2 px-5 py-2 rounded-full bg-white text-black font-bold"
         >
-          <FileText size={18} />
           Resume
-        </a>
+        </button>
       </div>
     </motion.div>
 
@@ -262,7 +295,10 @@ const Hero = () => (
       className="absolute bottom-10"
     >
       <Link to="skills" smooth={true}>
-        <ChevronDown className="text-gray-500 cursor-pointer hover:text-white" size={30} />
+        <ChevronDown
+          className="text-gray-500 cursor-pointer hover:text-white"
+          size={30}
+        />
       </Link>
     </motion.div>
   </section>
@@ -271,7 +307,10 @@ const Hero = () => (
 const Skills = () => (
   <section id="skills" className="py-20 bg-zinc-950 text-white px-4 md:px-20">
     <div className="max-w-6xl mx-auto">
-      <SectionTitle title="Technical Skills Overview" subtitle="Tools & Technologies I use" />
+      <SectionTitle
+        title="Technical Skills Overview"
+        subtitle="Tools & Technologies I use"
+      />
       {skillCategories.map((cat, catIndex) => (
         <div key={catIndex} className="mt-12">
           <h3 className="text-xl font-semibold mb-6 text-gray-400 border-l-4 border-blue-500 pl-4">
@@ -315,16 +354,24 @@ const Skills = () => (
 );
 
 const Projects = () => (
-  <section id="projects" className="py-20 bg-black text-white px-4 md:px-20 relative">
+  <section
+    id="projects"
+    className="py-20 bg-black text-white px-4 md:px-20 relative"
+  >
     <div className="max-w-6xl mx-auto">
-      <SectionTitle title="Featured Projects" subtitle="What I've been working on" />
+      <SectionTitle
+        title="Featured Projects"
+        subtitle="What I've been working on"
+      />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
         {projects.map((project, index) => (
           <motion.div
             key={index}
             className="group relative rounded-2xl overflow-hidden bg-zinc-900 border border-zinc-800 flex flex-col h-full"
           >
-            <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
+            <div
+              className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
+            />
             <div className="p-8 flex flex-col h-full relative z-10">
               <div className="mb-4">
                 <span className="text-xs font-bold px-3 py-1 rounded-full border border-white/10 bg-white/5 text-gray-300">
@@ -338,11 +385,21 @@ const Projects = () => (
                 {project.desc}
               </p>
               <div className="flex items-center gap-6 mt-auto">
-                <a href={project.githubLink} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm font-bold text-white/50 hover:text-white transition-colors">
+                <a
+                  href={project.githubLink}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-2 text-sm font-bold text-white/50 hover:text-white transition-colors"
+                >
                   <Github size={16} /> Code
                 </a>
                 {project.liveLink && (
-                  <a href={project.liveLink} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm font-bold text-blue-400 hover:text-blue-300 transition-colors">
+                  <a
+                    href={project.liveLink}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center gap-2 text-sm font-bold text-blue-400 hover:text-blue-300 transition-colors"
+                  >
                     <ExternalLink size={16} /> Live Demo
                   </a>
                 )}
@@ -385,10 +442,16 @@ const Education = () => (
 );
 
 const Contact = () => (
-  <section id="contact" className="py-20 bg-black text-white px-4 relative overflow-hidden">
+  <section
+    id="contact"
+    className="py-20 bg-black text-white px-4 relative overflow-hidden"
+  >
     <div className="absolute top-0 right-0 w-96 h-96 bg-purple-900/10 rounded-full blur-[120px]" />
     <div className="max-w-2xl mx-auto text-center relative z-10">
-      <SectionTitle title="Get In Touch" subtitle="Let's build something together" />
+      <SectionTitle
+        title="Get In Touch"
+        subtitle="Let's build something together"
+      />
       <motion.div
         initial={{ scale: 0.9, opacity: 0 }}
         whileInView={{ scale: 1, opacity: 1 }}
@@ -399,12 +462,24 @@ const Contact = () => (
           Feel free to reach out for collaborations or just a hello!
         </p>
         <div className="flex flex-col md:flex-row gap-6 justify-center">
-          <ContactCard icon={<Mail />} title="Email Me" value={personalInfo.email} href={`mailto:${personalInfo.email}`} />
-          <ContactCard icon={<Phone />} title="Call Me" value={personalInfo.phone} href={`tel:${personalInfo.phone}`} />
+          <ContactCard
+            icon={<Mail />}
+            title="Email Me"
+            value={personalInfo.email}
+            href={`mailto:${personalInfo.email}`}
+          />
+          <ContactCard
+            icon={<Phone />}
+            title="Call Me"
+            value={personalInfo.phone}
+            href={`tel:${personalInfo.phone}`}
+          />
         </div>
       </motion.div>
       <footer className="mt-20 text-gray-600 text-sm">
-        <p>© {new Date().getFullYear()} {personalInfo.name}. All rights reserved.</p>
+        <p>
+          © {new Date().getFullYear()} {personalInfo.name}. All rights reserved.
+        </p>
         <p className="mt-2">Designed with React & Tailwind</p>
       </footer>
     </div>
